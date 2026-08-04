@@ -599,8 +599,7 @@ Database:
 # Author
 
 **Alishba Asif**
-
-Frontend Developer | Full Stack Developer
+AI Cloud Native Developer | AI Engineer
 
 GitHub: https://github.com/Alishbasif
 > 
