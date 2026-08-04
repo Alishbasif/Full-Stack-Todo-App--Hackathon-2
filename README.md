@@ -467,6 +467,11 @@ Request Authorized
 ↓
 
 Database Access
+
+↓
+
+Frontend UI Updated
+
 ```
 
 ---
@@ -597,11 +602,11 @@ Database:
 
 Frontend Developer | Full Stack Developer
 
-GitHub:
-> https://github.com/your-username
+GitHub: https://github.com/Alishbasif
+> 
 
-LinkedIn:
-> https://linkedin.com/in/your-profile
+LinkedIn: https://www.linkedin.com/in/alishba-asif-222b77363/
+> 
 
 ---
 
@@ -617,9 +622,5 @@ If you found this project helpful, consider giving it a ⭐ on GitHub.
 
 Happy Coding! 😊
 
-↓
-
-Frontend UI Updated
-```
 
 ---
