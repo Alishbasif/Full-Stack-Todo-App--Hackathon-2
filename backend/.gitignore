@@ -1,0 +1,34 @@
+# env files
+.env
+.env.local
+.env*.local
+
+# python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# virtual environments
+.venv/
+venv/
+
+# build artifacts
+dist/
+build/
+*.egg-info/
+
+# test / lint caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+htmlcov/
+.coverage
+
+# editors
+.vscode/
+.idea/
+
+# NOTE: alembic/versions/ is intentionally NOT ignored — migration files must
+# be committed (Constitution IV: every schema change ships as a migration).

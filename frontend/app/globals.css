@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html,
+  body {
+    @apply h-full;
+  }
+
+  body {
+    @apply bg-background text-slate-100 antialiased;
+  }
+
+  ::selection {
+    @apply bg-primary/40 text-white;
+  }
+
+  /* Consistent, visible focus ring for keyboard users (FR-011) */
+  :focus-visible {
+    outline: 2px solid #22d3ee;
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+}
+
+@layer components {
+  /* Glassmorphism surface used by cards, dialogs, nav */
+  .glass-surface {
+    @apply rounded-card border border-white/10 bg-surface/60 backdrop-blur-xl;
+  }
+
+  .glass-panel {
+    @apply glass-surface shadow-[0_8px_32px_rgba(0,0,0,0.35)];
+  }
+
+  .btn-focus {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+}
+
+@layer utilities {
+  .aurora-blob {
+    @apply pointer-events-none absolute rounded-full blur-3xl;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary via-secondary to-accent-cyan bg-clip-text text-transparent;
+  }
+}
+
+/* Respect reduced-motion preference: disable decorative animation (FR-011 / accessibility) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
