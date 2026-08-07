@@ -20,6 +20,31 @@ if (!secret) {
   throw new Error("BETTER_AUTH_SECRET environment variable is required");
 }
 
+/**
+ * Origin-check / CSRF protection (better-auth's originCheckMiddleware)
+ * validates every request's `Origin` header against `new URL(baseURL).origin`
+ * plus `trustedOrigins`. `BETTER_AUTH_URL` is the explicit override; when
+ * unset, fall back to Vercel's `VERCEL_PROJECT_PRODUCTION_URL` — the stable
+ * production alias Vercel injects automatically — rather than hardcoding a
+ * per-deployment URL (those include a random hash and change on every
+ * deploy, e.g. `*-v12gdm7ts.vercel.app`).
+ */
+const baseURL =
+  process.env.BETTER_AUTH_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000");
+
+/**
+ * Additionally trust the current deployment's own preview/production URL
+ * (`VERCEL_URL`, Vercel-injected, changes per deployment) so Preview
+ * deployments authenticate correctly too, without disabling the origin
+ * check itself.
+ */
+const trustedOrigins = Array.from(
+  new Set([baseURL, ...(process.env.VERCEL_URL ? [`https://${process.env.VERCEL_URL}`] : [])]),
+);
+
 const SEVEN_DAYS_SECONDS = 60 * 60 * 24 * 7; // FR-008, SC-006
 
 /**
@@ -44,7 +69,8 @@ pool.on("error", (err) => {
 
 export const auth = betterAuth({
   secret,
-  baseURL: process.env.BETTER_AUTH_URL,
+  baseURL,
+  trustedOrigins,
   database: pool,
   emailAndPassword: {
     enabled: true,
